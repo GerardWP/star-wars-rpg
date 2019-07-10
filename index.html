@@ -15,34 +15,40 @@
 <body>
     <h1>Star Wars Fighter</h1>
     <div class="pick-avatars">
-        <h2>Choose your character</h2>
-        <section id="choosePlayer">
+        <h2 id="top-text">Choose your character</h2>
+        <section id="choose-player">
             <article id="avatar-1">
                 <h4>Obi-Wan Kenobi</h4>
                 <img src="./assets/images/obi-wan.jpg" alt="Obi-Wan Kenobi">
-                <p id="healthMeter-1">100</p>
+                <p id="health-meter-1">100</p>
             </article>
-            <article id="avatar-1">
+            <article id="avatar-2">
                 <h4>Luke Skywalker</h4>
                 <img src="./assets/images/luke-skywalker.jpg" alt="Luke Skywalker">
-                <p id="healthMeter-2">120</p>
+                <p id="health-meter-2">120</p>
             </article>
-            <article id="avatar-1">
+            <article id="avatar-3">
                 <h4>Darth Sideous</h4>
                 <img src="./assets/images/sideous.jpg" alt="Darth Sideous">
-                <p id="healthMeter-3">150</p>
+                <p id="health-meter-3">150</p>
             </article>
-            <article id="avatar-1">
+            <article id="avatar-4">
                 <h4>Darth Maul</h4>
                 <img src="./assets/images/maul.jpg" alt="Darth Maul">
-                <p id="healthMeter-4">180</p>
+                <p id="health-meter-4">180</p>
             </article>
         </section>
     </div>
     <div class="arena">
-        <section id="attackerZone"></section>
-        <section id="statsZone"></section>
-        <section id="defenderZone"></section>
+        <section id="attacker-zone">
+            <p id="attack-stats"></p>
+        </section>
+        <section id="hit-zone">
+            <button id="attack-btn">Attack</button>
+        </section>
+        <section id="defender-zone">
+            <p id="defend-stats"></p>
+        </section>
     </div>
 
 
