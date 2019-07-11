@@ -1,47 +1,63 @@
 $(document).ready(function () {
 
     var rey = {
+        name: "Rey",
         healthPts: 120,
         attack: 5,
-        cntrAttack: 5
-    }
-
-    var skywalker = {
-        healthPts: 100,
-        attack: 8,
-        cntrAttack: 8
+        cntrAttack: 5,
+        healthText: $("#hp-1")
     }
 
     var darthMaul = {
+        name: "Darth Maul",
         healthPts: 180,
         attack: 25,
-        cntrAttack: 25
+        cntrAttack: 25,
+        healthText: $("#hp-2")
+    }
+
+    var skywalker = {
+        name: "Luke Skywalker",
+        healthPts: 100,
+        attack: 8,
+        cntrAttack: 8,
+        healthText: $("#hp-3")
     }
 
     var kyloRen = {
+        name: "Kylo Ren",
         healthPts: 150,
         attack: 20,
-        cntrAttack: 20
+        cntrAttack: 20,
+        healthText: $("#hp-4")
     }
 
+    var characters = {
+        rey: rey,
+        skywalker: skywalker,
+        darthMaul: darthMaul,
+        kyloRen: kyloRen
+    }
 
-    var reyHP = $("#hp-1");
-    var maulHP = $("#hp-2");
-    var lukeHP = $("#hp-3");
-    var kyloHP = $("#hp-4");
 
     var topText = $("#top-text");
     var attackText = $("#attack-stats");
     var defendText = $("#defend-stats");
 
-    reyHP.text(rey.healthPts);
-    kyloHP.text(kyloRen.healthPts);
-    lukeHP.text(skywalker.healthPts);
-    maulHP.text(darthMaul.healthPts);
+    rey.healthText.text(rey.healthPts);
+    darthMaul.healthText.text(darthMaul.healthPts);
+    skywalker.healthText.text(skywalker.healthPts);
+    kyloRen.healthText.text(kyloRen.healthPts);
 
     var playerChosen = false;
     var opponentChosen = false;
     // var fightReady = false;
+
+    var playerAvatar;
+    var opponentAvatar;
+
+    var fighter;
+    var enemy;
 
     function play() {
         var lightSaber = $("#sound")[0];
@@ -61,99 +77,36 @@ $(document).ready(function () {
         }
     }
 
-    $("article").click(function () {
+    var ogAttack;
 
+    //  detatch when dead
 
-        if (($("article").is("#avatar-1")) && !playerChosen) {
+    $(".avatar").click(function () {
+
+        if (($(".avatar") && !playerChosen)) {
             playerChosen = true;
-            playerAvatar = rey;
+            playerAvatar = $(this).attr("data-name");
+            fighter = characters[playerAvatar];
+            ogAttack = fighter.attack;
             play();
             $(this).unbind('click').prependTo("#attacker-zone").css({
                 "background": "rgba(21, 104, 230, 0.9)",
                 "color": "#fff"
             });
-            $("#top-text").text("Choose your opponent").css({
+            topText.text("Choose your opponent").css({
                 "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
             });
-        } else if (($("article").is("#avatar-2")) && !playerChosen) {
-            playerChosen = true;
-            playerAvatar = darthMaul;
-            play();
-            $(this).unbind('click').prependTo("#attacker-zone").css({
-                "background": "rgba(21, 104, 230, 0.9)",
-                "color": "#fff"
-            });
-            $("#top-text").text("Choose your opponent").css({
-                "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-            });
-        } else if (($("article").is("#avatar-3")) && !playerChosen) {
-            playerChosen = true;
-            playerAvatar = skywalker;
-            play();
-            $(this).unbind('click').prependTo("#attacker-zone").css({
-                "background": "rgba(21, 104, 230, 0.9)",
-                "color": "#fff"
-            });
-            $("#top-text").text("Choose your opponent").css({
-                "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-            });
-        } else if (($("article").is("#avatar-4")) && !playerChosen) {
-            playerChosen = true;
-            playerAvatar = kyloRen;
-            play();
-            $(this).unbind('click').prependTo("#attacker-zone").css({
-                "background": "rgba(21, 104, 230, 0.9)",
-                "color": "#fff"
-            });
-            $("#top-text").text("Choose your opponent").css({
-                "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-            });
-        } else if (($("article").is("#avatar-1")) && !opponentChosen) {
+        } else if (($(".avatar") && !opponentChosen)) {
             opponentChosen = true;
             fightReady = true;
-            opponentAvatar = rey;
+            opponentAvatar = $(this).attr("data-name");
+            enemy = characters[opponentAvatar]
             play();
             $(this).prependTo("#defender-zone").css({
                 "background": "rgba(255, 41, 41, 0.9)",
                 "color": "#fff"
             });
-            $("#top-text").text("fight!").css({
-                "text-shadow": "1px 1px 13px rgb(22, 41, 19), 0 0 25px rgb(32, 68, 18), 0 0 5px rgb(25, 139, 44)"
-            });
-        } else if (($("article").is("#avatar-2")) && !opponentChosen) {
-            opponentChosen = true;
-            fightReady = true;
-            opponentAvatar = darthMaul;
-            play();
-            $(this).prependTo("#defender-zone").css({
-                "background": "rgba(255, 41, 41, 0.9)",
-                "color": "#fff"
-            });
-            $("#top-text").text("fight!").css({
-                "text-shadow": "1px 1px 13px rgb(22, 41, 19), 0 0 25px rgb(32, 68, 18), 0 0 5px rgb(25, 139, 44)"
-            });
-        } else if (($("article").is("#avatar-3")) && !opponentChosen) {
-            opponentChosen = true;
-            fightReady = true;
-            opponentAvatar = skywalker;
-            play();
-            $(this).prependTo("#defender-zone").css({
-                "background": "rgba(255, 41, 41, 0.9)",
-                "color": "#fff"
-            });
-            $("#top-text").text("fight!").css({
-                "text-shadow": "1px 1px 13px rgb(22, 41, 19), 0 0 25px rgb(32, 68, 18), 0 0 5px rgb(25, 139, 44)"
-            });
-        } else if (($("article").is("#avatar-4")) && !opponentChosen) {
-            opponentChosen = true;
-            fightReady = true;
-            opponentAvatar = kyloRen;
-            play();
-            $(this).prependTo("#defender-zone").css({
-                "background": "rgba(255, 41, 41, 0.9)",
-                "color": "#fff"
-            });
-            $("#top-text").text("fight!").css({
+            topText.text("fight!").css({
                 "text-shadow": "1px 1px 13px rgb(22, 41, 19), 0 0 25px rgb(32, 68, 18), 0 0 5px rgb(25, 139, 44)"
             });
         }
@@ -164,6 +117,13 @@ $(document).ready(function () {
 
         if (opponentChosen) {
             playClash();
+            fighter.healthPts = fighter.healthPts - enemy.cntrAttack;
+            fighter.healthText.text(fighter.healthPts);
+            enemy.healthPts = enemy.healthPts - fighter.attack;
+            enemy.healthText.text(enemy.healthPts);
+            fighter.attack = fighter.attack + ogAttack;
+            attackText.text();
+            defendText
         } else return;
 
 
