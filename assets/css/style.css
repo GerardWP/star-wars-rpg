@@ -12,8 +12,20 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background: url(../images/sw-bg.png) no-repeat center top;
+    background: url(../images/bg-3-dark.jpg) no-repeat center top;
     background-size: cover;
+}
+
+footer {
+    margin-top: auto;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: .7em;
+    letter-spacing: .07em;
+    color: rgb(58, 97, 148);
 }
 
 @font-face {
@@ -29,9 +41,9 @@ body {
 h1 {
     font-family: 'star_jediregular', Orbitron;
     font-weight: 900;
-    font-size: 2.5em;
+    font-size: 3em;
     color: rgba(255, 255, 255, 0);
-    background: rgba(0, 0, 0, 0.637);
+    /* background: rgba(0, 0, 0, 0.637); */
     letter-spacing: .05em;
     text-align: center;
     -webkit-text-stroke: 1px yellow;
@@ -43,9 +55,12 @@ h1 {
 h2 {
     font-family: 'star_jediregular';
     color: #ebf8ff;
-    margin: 15px 0 20px;
-    text-shadow: 1px 1px 7px rgb(14, 118, 255), 0 0 25px rgb(29, 153, 255), 0 0 5px rgb(38, 139, 255);
+    padding: 20px;
+    margin: 0;
+    text-shadow: 1px 1px 13px rgb(14, 118, 255), 0 0 25px rgb(29, 153, 255), 0 0 5px rgb(38, 139, 255);
+    /* text-shadow: 1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38); */
     letter-spacing: .08em;
+    font-size: 2em;
 }
 
 .pick-avatars {
@@ -104,9 +119,15 @@ article img {
 
 #attacker-zone,
 #defender-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
     height: 300px;
     width: 300px;
-    border-radius: 10px;
+    border-radius: 15px;
+    padding: 15px;
+    ;
 }
 
 #attacker-zone {
@@ -119,6 +140,42 @@ article img {
     box-shadow: 1px 1px 17px rgb(255, 23, 23), 0 0 25px rgb(158, 53, 20), 0 0 5px rgb(255, 38, 67);
 }
 
+#attacker-zone div,
+#defender-zone div {
+    height: 65px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.56);
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    width: 100%;
+    font-size: .8em;
+    display: flex;
+    text-transform: uppercase;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    letter-spacing: .03em;
+    margin-top: 25px;
+}
+
+#attacker-zone div {
+    color: rgb(231, 231, 231);
+    border: solid 1px rgb(86, 193, 255);
+}
+
+#defender-zone div {
+    color: rgb(231, 231, 231);
+    border: solid 1px rgb(255, 86, 86);
+}
+
+#attacker-zone div p,
+#defender-zone div p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+}
+
 #hit-zone {
     height: 200px;
     display: flex;
@@ -128,7 +185,7 @@ article img {
 }
 
 button {
-    background: rgba(0, 0, 0, 0.629);
+    background: rgba(0, 0, 0, 0.729);
     border-radius: 5px;
     padding: 15px 35px;
     font-family: 'star_jediregular', Orbitron;
