@@ -48,64 +48,81 @@ $(document).ready(function () {
 
         if (($("article").is("#avatar-1")) && !playerChosen) {
             playerChosen = true;
-            $(this).prependTo("#attacker-zone");
-            topText.text("Choose your opponent");
-            $("#top-text").css({
+            $(this).prependTo("#attacker-zone").css({
+                "background": "rgba(21, 104, 230, 0.9)",
+                "color": "#fff"
+            });
+            $("#top-text").text("Choose your opponent").css({
                 "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-            })
+            });
         } else if (($("article").is("#avatar-2")) && !playerChosen) {
             playerChosen = true;
-            $(this).prependTo("#attacker-zone");
-            topText.text("Choose your opponent");
-            $("#top-text").css({
+            $(this).prependTo("#attacker-zone").css({
+                "background": "rgba(21, 104, 230, 0.9)",
+                "color": "#fff"
+            });
+            $("#top-text").text("Choose your opponent").css({
                 "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-            })
+            });
         } else if (($("article").is("#avatar-3")) && !playerChosen) {
             playerChosen = true;
-            $(this).prependTo("#attacker-zone");
-            topText.text("Choose your opponent");
-            $("#top-text").css({
+            $(this).prependTo("#attacker-zone").css({
+                "background": "rgba(21, 104, 230, 0.9)",
+                "color": "#fff"
+            });
+            $("#top-text").text("Choose your opponent").css({
                 "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-            })
+            });
         } else if (($("article").is("#avatar-4")) && !playerChosen) {
             playerChosen = true;
-            $(this).prependTo("#attacker-zone");
-            topText.text("Choose your opponent");
-            $("#top-text").css({
+            $(this).prependTo("#attacker-zone").css({
+                "background": "rgba(21, 104, 230, 0.9)",
+                "color": "#fff"
+            });
+            $("#top-text").text("Choose your opponent").css({
                 "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-            })
+            });
         } else if (($("article").is("#avatar-1")) && playerChosen && !fightReady) {
             opponentChosen = true;
             fightReady = true;
-            $(this).prependTo("#defender-zone");
+            $(this).prependTo("#defender-zone").css({
+                "background": "rgba(255, 41, 41, 0.9)",
+                "color": "#fff"
+            });
             topText.text("fight!");
-            $("#top-text").css({
+            $("#top-text").text("fight!").css({
                 "text-shadow": "1px 1px 13px rgb(42, 255, 14), 0 0 25px rgb(138, 255, 29), 0 0 5px rgb(38, 255, 103)"
-            })
+            });
         } else if (($("article").is("#avatar-2")) && playerChosen && !fightReady) {
             opponentChosen = true;
             fightReady = true;
-            $(this).prependTo("#defender-zone");
-            topText.text("fight!");
-            $("#top-text").css({
+            $(this).prependTo("#defender-zone").css({
+                "background": "rgba(255, 41, 41, 0.9)",
+                "color": "#fff"
+            });
+            $("#top-text").text("fight!").css({
                 "text-shadow": "1px 1px 13px rgb(42, 255, 14), 0 0 25px rgb(138, 255, 29), 0 0 5px rgb(38, 255, 103)"
-            })
+            });
         } else if (($("article").is("#avatar-3")) && playerChosen && !fightReady) {
             opponentChosen = true;
             fightReady = true;
-            $(this).prependTo("#defender-zone");
-            topText.text("fight!");
-            $("#top-text").css({
+            $(this).prependTo("#defender-zone").css({
+                "background": "rgba(255, 41, 41, 0.9)",
+                "color": "#fff"
+            });
+            $("#top-text").text("fight!").css({
                 "text-shadow": "1px 1px 13px rgb(42, 255, 14), 0 0 25px rgb(138, 255, 29), 0 0 5px rgb(38, 255, 103)"
-            })
+            });
         } else if (($("article").is("#avatar-4")) && playerChosen && !fightReady) {
             opponentChosen = true;
             fightReady = true;
-            $(this).prependTo("#defender-zone");
-            topText.text("fight!");
-            $("#top-text").css({
+            $(this).prependTo("#defender-zone").css({
+                "background": "rgba(255, 41, 41, 0.9)",
+                "color": "#fff"
+            });
+            $("#top-text").text("fight!").css({
                 "text-shadow": "1px 1px 13px rgb(42, 255, 14), 0 0 25px rgb(138, 255, 29), 0 0 5px rgb(38, 255, 103)"
-            })
+            });
         }
 
     })
