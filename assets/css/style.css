@@ -66,6 +66,7 @@ h2 {
 .pick-avatars {
     max-width: 1000px;
     width: 95%;
+    min-height: 245px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -145,16 +146,12 @@ article img {
     height: 65px;
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.56);
-    font-family: 'Helvetica Neue', Helvetica, sans-serif;
     width: 100%;
-    font-size: .8em;
     display: flex;
     text-transform: uppercase;
-    font-weight: 600;
     justify-content: center;
     align-items: center;
     padding: 5px 10px;
-    letter-spacing: .03em;
     margin-top: 25px;
 }
 
@@ -173,6 +170,11 @@ article img {
     margin: 0;
     padding: 0;
     text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: .8em;
+    font-weight: 600;
+    letter-spacing: .03em;
+    line-height: 1.5em;
 
 }
 

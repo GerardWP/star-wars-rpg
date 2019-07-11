@@ -3,9 +3,10 @@ $(document).ready(function () {
     var rey = {
         name: "Rey",
         healthPts: 120,
-        attack: 5,
-        cntrAttack: 5,
-        healthText: $("#hp-1")
+        attack: 8,
+        cntrAttack: 8,
+        healthText: $("#hp-1"),
+        id: $("#avatar-1")
     }
 
     var darthMaul = {
@@ -13,15 +14,17 @@ $(document).ready(function () {
         healthPts: 180,
         attack: 25,
         cntrAttack: 25,
-        healthText: $("#hp-2")
+        healthText: $("#hp-2"),
+        id: $("#avatar-2")
     }
 
     var skywalker = {
         name: "Luke Skywalker",
         healthPts: 100,
-        attack: 8,
-        cntrAttack: 8,
-        healthText: $("#hp-3")
+        attack: 5,
+        cntrAttack: 5,
+        healthText: $("#hp-3"),
+        id: $("#avatar-3")
     }
 
     var kyloRen = {
@@ -29,7 +32,8 @@ $(document).ready(function () {
         healthPts: 150,
         attack: 20,
         cntrAttack: 20,
-        healthText: $("#hp-4")
+        healthText: $("#hp-4"),
+        id: $("#avatar-4")
     }
 
     var characters = {
@@ -59,6 +63,8 @@ $(document).ready(function () {
     var fighter;
     var enemy;
 
+    var winCount = 0;
+
     function play() {
         var lightSaber = $("#sound")[0];
         if (lightSaber.paused) {
@@ -77,11 +83,16 @@ $(document).ready(function () {
         }
     }
 
+    function clearText() {
+        attackText.text("");
+        defendText.text("");
+    }
+
     var ogAttack;
 
     //  detatch when dead
 
-    $(".avatar").click(function () {
+    $("article").click(function () {
 
         if (($(".avatar") && !playerChosen)) {
             playerChosen = true;
@@ -115,16 +126,50 @@ $(document).ready(function () {
 
     $("button").click(function () {
 
-        if (opponentChosen) {
+        if (opponentChosen && fighter.healthPts > 0 && enemy.healthPts > 0) {
             playClash();
             fighter.healthPts = fighter.healthPts - enemy.cntrAttack;
             fighter.healthText.text(fighter.healthPts);
             enemy.healthPts = enemy.healthPts - fighter.attack;
             enemy.healthText.text(enemy.healthPts);
-            fighter.attack = fighter.attack + ogAttack;
-            attackText.text();
-            defendText
-        } else return;
+            if (enemy.healthPts <= 0) {
+                attackText.text("You defeated " + enemy.name + "!")
+                defendText.text(enemy.name + " has been vanquished!...choose your next opponent")
+                topText.text("Choose your next opponent").css({
+                    "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
+                });
+                $(enemy.id).detach();
+                opponentChosen = false;
+                ++winCount;
+                setTimeout(clearText, 2000);
+                console.log(winCount);
+                console.log(fighter);
+                console.log(enemy);
+            } else if (fighter.healthPts <= 0) {
+                attackText.text("You have been defeated");
+                $(".avatar").bind('click').prependTo("#choose-player").css({
+                    "background": "rgba(255, 255, 255, 0.9",
+                    "color": "#000"
+                });
+                fighter;
+                enemy;
+                characters = {
+                    rey: rey,
+                    skywalker: skywalker,
+                    darthMaul: darthMaul,
+                    kyloRen: kyloRen
+                };
+                console.log(fighter);
+                console.log(enemy);
+            } else {
+                attackText.text(enemy.name + " attacked you for " + enemy.cntrAttack + " damage");
+                defendText.text("You attacked " + enemy.name + " for " + fighter.attack + " damage");
+                fighter.attack = fighter.attack + ogAttack;
+                console.log(winCount);
+                console.log(fighter);
+                console.log(enemy);
+            }
+        }
 
 
     })
