@@ -2,8 +2,8 @@ $(document).ready(function () {
 
     var rey = {
         name: "Rey",
-        healthPts: 120,
-        attack: 8,
+        healthPts: 135,
+        attack: 15,
         cntrAttack: 8,
         healthText: $("#hp-1"),
         id: $("#avatar-1")
@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     var darthMaul = {
         name: "Darth Maul",
-        healthPts: 180,
+        healthPts: 170,
         attack: 25,
         cntrAttack: 25,
         healthText: $("#hp-2"),
@@ -20,9 +20,9 @@ $(document).ready(function () {
 
     var skywalker = {
         name: "Luke Skywalker",
-        healthPts: 100,
-        attack: 5,
-        cntrAttack: 5,
+        healthPts: 125,
+        attack: 17,
+        cntrAttack: 6,
         healthText: $("#hp-3"),
         id: $("#avatar-3")
     }
@@ -40,7 +40,7 @@ $(document).ready(function () {
         rey: rey,
         skywalker: skywalker,
         darthMaul: darthMaul,
-        kyloRen: kyloRen
+        kyloRen: kyloRen,
     }
 
 
@@ -90,28 +90,30 @@ $(document).ready(function () {
 
     var ogAttack;
 
-    //  detatch when dead
+    //  detatch when dead // perhaps try adding and removign classes
 
-    $("article").click(function () {
+    $(".avatar").on("click", function () {
 
-        if (($(".avatar") && !playerChosen)) {
+        if (!playerChosen) {
             playerChosen = true;
             playerAvatar = $(this).attr("data-name");
             fighter = characters[playerAvatar];
             ogAttack = fighter.attack;
             play();
-            $(this).unbind('click').prependTo("#attacker-zone").css({
+            $(this).off('click').prependTo("#attacker-zone").css({
                 "background": "rgba(21, 104, 230, 0.9)",
                 "color": "#fff"
             });
             topText.text("Choose your opponent").css({
                 "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
             });
-        } else if (($(".avatar") && !opponentChosen)) {
+        } else if (!opponentChosen) {
             opponentChosen = true;
             fightReady = true;
             opponentAvatar = $(this).attr("data-name");
             enemy = characters[opponentAvatar]
+            console.log(opponentChosen);
+            console.log(enemy);
             play();
             $(this).prependTo("#defender-zone").css({
                 "background": "rgba(255, 41, 41, 0.9)",
@@ -126,41 +128,53 @@ $(document).ready(function () {
 
     $("button").click(function () {
 
-        if (opponentChosen && fighter.healthPts > 0 && enemy.healthPts > 0) {
+        if (!opponentChosen) {
+            return
+        } else if (opponentChosen && fighter.healthPts > 0 && enemy.healthPts > 0) {
             playClash();
             fighter.healthPts = fighter.healthPts - enemy.cntrAttack;
             fighter.healthText.text(fighter.healthPts);
             enemy.healthPts = enemy.healthPts - fighter.attack;
             enemy.healthText.text(enemy.healthPts);
-            if (enemy.healthPts <= 0) {
-                attackText.text("You defeated " + enemy.name + "!")
-                defendText.text(enemy.name + " has been vanquished!...choose your next opponent")
-                topText.text("Choose your next opponent").css({
-                    "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
-                });
-                $(enemy.id).detach();
-                opponentChosen = false;
+            if (enemy.healthPts <= 0 && fighter.healthPts > 0) {
                 ++winCount;
-                setTimeout(clearText, 2000);
-                console.log(winCount);
-                console.log(fighter);
-                console.log(enemy);
-            } else if (fighter.healthPts <= 0) {
-                attackText.text("You have been defeated");
-                $(".avatar").bind('click').prependTo("#choose-player").css({
-                    "background": "rgba(255, 255, 255, 0.9",
-                    "color": "#000"
+                defendText.text(enemy.name + " has been vanquished!");
+                attackText.text("You defeated " + enemy.name + "!");
+                $(enemy.id).css({
+                    "display": "none"
                 });
-                fighter;
-                enemy;
-                characters = {
-                    rey: rey,
-                    skywalker: skywalker,
-                    darthMaul: darthMaul,
-                    kyloRen: kyloRen
+                enemy = undefined;
+                opponentChosen = false;
+                if (winCount == 3) {
+                    topText.text("You won!! The Galaxy is yours!").css({
+                        "text-shadow": "1px 1px 13px rgb(14, 118, 255), 0 0 25px rgb(29, 153, 255), 0 0 5px rgb(38, 139, 255)",
+                        "font-size": "3.5em",
+                        "text-align": "center"
+                    });
+                    $(".restart-button").css({
+                        "display": "inline-block"
+                    });
+                } else {
+                    topText.text("Choose your next opponent").css({
+                        "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)"
+                    });
                 };
-                console.log(fighter);
                 console.log(enemy);
+                setTimeout(clearText, 2000);
+            } else if (fighter.healthPts <= 0) {
+                attackText.text("You have been killed in battle");
+
+                $("#choose-player").css({
+                    "display": "none"
+                });
+                topText.text("oh no..you (je)Died!!").css({
+                    "text-shadow": "1px 1px 13px rgb(255, 14, 14), 0 0 25px rgb(255, 74, 29), 0 0 5px rgb(255, 38, 38)",
+                    "font-size": "3.5em",
+                    "text-align": "center"
+                });
+                $(".restart-button").css({
+                    "display": "inline-block"
+                });
             } else {
                 attackText.text(enemy.name + " attacked you for " + enemy.cntrAttack + " damage");
                 defendText.text("You attacked " + enemy.name + " for " + fighter.attack + " damage");
