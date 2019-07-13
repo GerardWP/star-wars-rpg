@@ -1,3 +1,10 @@
+//
+// Star Wars - RPG Gerard Pelly
+//
+// I know this code is not the cleanest, and also I do not have a reset function. I would never make a game
+// reset simply by refreshignt he page (which is what ive done here) but i have simply run out of time now to 
+// fix this. I have unavoidable plans tonight. be as brutal as possible with feedback, I feel I need to tidy up the way I do things a bit. Cheers.
+
 $(document).ready(function () {
 
     var rey = {
@@ -88,19 +95,19 @@ $(document).ready(function () {
         defendText.text("");
     }
 
-    var ogAttack;
-
-    //  detatch when dead // perhaps try adding and removign classes
+    var ogAttack; // varible to hold players original attack power
 
     $(".avatar").on("click", function () {
 
-        if (!playerChosen) {
+        if ($(this).attr("data-name") === playerAvatar) {
+            return
+        } else if (!playerChosen) {
             playerChosen = true;
             playerAvatar = $(this).attr("data-name");
             fighter = characters[playerAvatar];
             ogAttack = fighter.attack;
             play();
-            $(this).off('click').prependTo("#attacker-zone").css({
+            $(this).prependTo("#attacker-zone").css({
                 "background": "rgba(21, 104, 230, 0.9)",
                 "color": "#fff"
             });
